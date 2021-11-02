@@ -1,12 +1,36 @@
 body {
-    background-color:black;
-    color: white;
+    background-color:skyblue;
+    color:black;
+  }
+
+.icherishDiv{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-left: 24px;
+  }
+
+
+  #icherishIcon{
+    margin-top: 24px;
+    width: 60px;
+    height:60px;
+    border-radius: 50%;
+    border:2px double white; 
+    background-color: black;
+    object-fit:fill;
+  }
+  #icherishName{
+    align-self: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: xx-large;
+    font-weight: bold;
   }
   
   .container2{
     width: 50%;
     height: 400px;
-    background-color:black;
+    background-color:white;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 0;
@@ -15,27 +39,7 @@ body {
     right: 0;
     margin: auto;
   }
-  .recipeGrid{
-    background-color: black;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
-    gap: 5px;
-    position: relative;
-  }
-    .wallpaper{
-    /* height: 230px; */
-    width: 100%;
-    background-repeat: no-repeat;
-    object-fit:cover;
-    opacity: 0.3;
-    transition: height 0.5s linear;
-}
-
-.wallpaper:hover {
-  opacity: 1.0;
-}
-
-  
+   
   .form-text {
     text-align: center;
     margin: 25px 25px;

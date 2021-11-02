@@ -1,13 +1,13 @@
 import './App.css';
 import Header from "./components/header/header";
-import Signup from './components/Signup/Signup';
+import Login from "./components/Login/Login"
 import AuthContextWrapper from "./context/AuthContext"
 
 function App() {
   return (
     <AuthContextWrapper>
         {/* <Header /> */}
-        <Signup />
+      <Login />
         </AuthContextWrapper>
 
   );

@@ -11,7 +11,8 @@ function isUserExits() {
     if (checkIfUserIsAuth() != null) {
         return {
             email: checkIfUserIsAuth().email,
-            userImage: checkIfUserIsAuth().userImage
+            userImage: checkIfUserIsAuth().userImage,
+            userName: checkIfUserIsAuth().userName
         }
     }
     return null
@@ -23,7 +24,8 @@ function reducer(state, action) {
             return {
                 user: {
                     email: action.user.email,
-                    userImage: action.user.userImage
+                    userImage: action.user.userImage,
+                    userName: action.user.userName
                 },
             };
         case "LOG_OUT":
