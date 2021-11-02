@@ -1,0 +1,112 @@
+body {
+    background-color:black;
+    color: white;
+  }
+  
+  .container2{
+    width: 50%;
+    height: 400px;
+    background-color:black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .recipeGrid{
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    gap: 5px;
+    position: relative;
+  }
+    .wallpaper{
+    /* height: 230px; */
+    width: 100%;
+    background-repeat: no-repeat;
+    object-fit:cover;
+    opacity: 0.3;
+    transition: height 0.5s linear;
+}
+
+.wallpaper:hover {
+  opacity: 1.0;
+}
+
+  
+  .form-text {
+    text-align: center;
+    margin: 25px 25px;
+    font-size: 40px;
+  }
+  
+  .form-div {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-group-inline {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .form {
+    width: 100%;
+  }
+  
+  .form-group-inline .inline-container {
+    display: inline-block;
+  }
+  
+  .form-group-inline .inline-container label {
+    display: block;
+    margin-bottom: 3px;
+  }
+  
+  .form-group-inline .inline-container input {
+    padding: 5px 5px;
+    width: 300px;
+  }
+  
+  .form-group-block {
+    margin-left: 82px;
+    margin-top: 20px;
+  }
+  
+  .block-container label {
+    display: block;
+    margin-bottom: 3px;
+    margin-top: 20px;
+  }
+  
+  .form-group-block .block-container input {
+    padding: 5px 5px;
+    width: 89%;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .button-container button {
+    padding: 10px 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  .button-container button:disabled {
+    background-color: grey;
+  }
+  
+  .errorMessage {
+    font-size: 16px;
+    color:red;
+  }
+  
