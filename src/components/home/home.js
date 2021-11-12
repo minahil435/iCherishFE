@@ -1,24 +1,40 @@
 import React, { useEffect } from "react";
 import "./home.css";
 import { AuthContext } from "../../context/AuthContext";
+import BackgroundImagesDisplay from "./BackgroundImagesDisplay"
 
 function Home(props) {
 
 
     const travelImages = [
-        "/images/cover.jpg",
-        "/images/cover1.jpg",
-        "/images/cover2.jpg",
+        "/images/travel.jpeg",
+        "/images/travel2.jpeg",
+        "/images/travel3.jpeg",
        
-        "/images/cover4.jpg",
+        "/images/travel4.jpeg",
         "/images/travelmain.jpeg",
-        "/images/cover1.jpg",
+        "/images/travel5.jpeg",
 
 
-        "/images/cover4.jpg",
-        "/images/cover.jpg",
-        "/images/cover1.jpg",
-        "/images/cover2.jpg",
+        "/images/travel6.jpeg",
+        "/images/travel7.jpeg",
+        "/images/travel8.jpeg",
+
+    ];
+    const foodImages = [
+        "/images/food.jpeg",
+        "/images/food2.jpeg",
+        "/images/food3.webp",
+
+        "/images/food4.jpeg",
+        "/images/foodmain.jpeg",
+        "/images/food5.jpeg",
+
+
+        "/images/food6.jpeg",
+        "/images/food7.jpeg",
+        "/images/food8.jpeg",
+
     ];
 
 
@@ -35,40 +51,25 @@ function Home(props) {
             <div className="HomeGrid">
                 <div className="HomeGridInner">
 
-                    {/* {travelImages.map((item, index) => {
+                    {travelImages.map((item, index) => {
                         return <BackgroundImagesDisplay
                             key={item.id}
                             item={item}
                             index={index}
-                            searchModeOn={searchModeOn}
                         />
-                    })
-                    } */}
-
-
-
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-                    
-
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-                  
-
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-                    <div className="HomeGridCube"></div>
-             
-
-
+                    })}
                 </div>
             </div>
 
             <div className="HomeGrid">
                 <div className="HomeGridInner">
-
+                    {foodImages.map((item, index) => {
+                        return <BackgroundImagesDisplay
+                            key={item.id}
+                            item={item}
+                            index={index}
+                        />
+                    })}
                 </div>
             </div>
 
