@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import "./_base.css";
+require("dotenv").config()
 
 ReactDOM.render(
   <React.StrictMode>
