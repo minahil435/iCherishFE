@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 import setAxiosAuthToken from "../../utils/checkAxioAuth";
 import useChangeInputConfig from "../../hooks/inputFieldHooks";
 import { AuthContext } from "../../context/AuthContext";
+import { Link, NavLink } from "react-router-dom";
 
 function Signup(props) {
 
@@ -30,7 +31,6 @@ function Signup(props) {
     handleNameOnFocus
   ] = useChangeInputConfig("name");
 
-
   const [
     password,
     handlepasswordChange,
@@ -41,34 +41,15 @@ function Signup(props) {
     handlepasswordOnFocus
   ] = useChangeInputConfig("password");
 
-
   const [canSubmit, setCanSubmit] = useState(true);
   const [confirmPassword, setconfirmPassword] = useState("");
   const [confirmPasswordError, setconfirmPasswordError] = useState("")
   const [confirmPasswordOnFocus, setconfirmPasswordOnFocus] = useState(false)
   const [selectedFile, setselectedFile] = useState(null)
 
-  const BackgroundImages = [
-    "/images/cover.jpg",
-    "/images/cover1.jpg",
-    "/images/cover2.jpg",
-    "/images/cover3.jpg",
-
-    "/images/cover4.jpg",
-    "/images/cover.jpg",
-    "/images/cover1.jpg",
-    "/images/cover2.jpg",
-
-    "/images/cover4.jpg",
-    "/images/cover.jpg",
-    "/images/cover1.jpg",
-    "/images/cover2.jpg",
-  ]
-
-
   useEffect(() => {
     if (user !== null) {
-      // props.history.push("/");
+      props.history.push("/");
     }
 
     if (emailOnFocus && passwordOnFocus && confirmPasswordOnFocus && nameOnFocus) {
@@ -125,24 +106,24 @@ function Signup(props) {
 
       let success = await Axios.post("/api/user/sign-up", formData);
       let jwtToken = success.data.payload;
+      let decodedToken = jwtDecode(jwtToken);
       setAxiosAuthToken(jwtToken);
 
-      let decodedToken = jwtDecode(jwtToken);
-      console.log("hello")
       dispatch({
         type: "LOGIN",
         user: {
           email: decodedToken.email,
-          userImage: decodedToken.userImage
+          userImage: decodedToken.userImage,
+          userName: decodedToken.userName,
+          postArray: decodedToken.postArray
         },
       });
 
-
       window.localStorage.setItem("jwtToken", jwtToken);
-      // props.history.push("/");
+      props.history.push("/");
 
     } catch (e) {
-      console.log("failed");
+      console.log(e.message);
     }
   };
 
@@ -165,7 +146,7 @@ function Signup(props) {
       <div className="Rightcontainer">
         <div id="haveAccount">
           <div>Already have a account?</div>
-          <div><button id="haveAccountButton">Log In! </button></div>
+          <div><Link id="haveAccountButton" to="/login">LogIn!</Link></div>
         </div>
 
         <div className="containerFlex">
@@ -247,7 +228,7 @@ function Signup(props) {
                   </div>
                 </div>
                 <div className="button-container">
-                  <button type="submit" disabled={canSubmit}>
+                  <button type="submit" disabled={canSubmit} >
                     Submit
                   </button>
                 </div>

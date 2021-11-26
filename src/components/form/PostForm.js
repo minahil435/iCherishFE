@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext} from 'react';
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -7,9 +7,11 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { AuthContext } from "../../context/AuthContext";
 import Axios from "../../utils/Axios"
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box';
 
 
-const Form = (props) => {
+const PostForm = (props) => {
     const {
         state: { user }
     } = useContext(AuthContext);
@@ -67,21 +69,19 @@ const Form = (props) => {
             setErrorSelectedFile("")
         }
 
-
-        console.log("g" + address + "fff")
-
         try {
             const formData = new FormData();
             formData.append("location", postData.location);
-            formData.append("creatorName", "minahil");
-            formData.append("creatorEmail", "minahil@gamil.com");
-            formData.append("category", "travel");
+            formData.append("creatorName", user.creatorName);
+            formData.append("creatorEmail", user.email);
+            formData.append("category", props.category);
             formData.append("title", postData.title);
             formData.append("message", postData.message);
             formData.append("memoryImage", postData.memoryImage);
 
             let success = await Axios.post("/api/memories/save-Post", formData);
             let object = success.data
+            props.AddPostButtonPressed(object)
             clear();
 
         } catch (e) {
@@ -89,11 +89,20 @@ const Form = (props) => {
         }
 
     };
-
+    
     return (
-        <Paper className={classes.paper}>
+        <Box
+            sx={{
+              
+                    width: 400,
+                    height: 450,
+                  
+                
+            }}
+        >
+        <Paper className={classes.paper} >
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">{'Create a Memory'}</Typography>
+                <Typography variant="h6">{'Share An Experience'}</Typography>
                 <div style={{ width: "95%" }}>
                     <TextField
                         required
@@ -184,8 +193,9 @@ const Form = (props) => {
                     Clear
                 </Button>
             </form>
-        </Paper>
+         </Paper>
+        </Box>
     );
 };
 
-export default Form;
+export default PostForm;

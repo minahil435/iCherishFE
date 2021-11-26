@@ -4,11 +4,9 @@ import Axios from "../../utils/Axios"
 import setAxiosAuthToken from "../../utils/checkAxioAuth";
 import useChangeInputConfig from "../../hooks/inputFieldHooks";
 import { AuthContext } from "../../context/AuthContext";
-
 import "./Login.css";
 
 function Login(props) {
-
   const {
     state: { user }, dispatch
   } = useContext(AuthContext);
@@ -37,7 +35,7 @@ function Login(props) {
 
   useEffect(() => {
     if (user !== null) {
-      // props.history.push("/");
+      props.history.push("/");
     }
 
     if (emailcanSubmit === false && passwordcanSubmit === false) {
@@ -67,27 +65,25 @@ function Login(props) {
         password: password,
       });
 
-
       let jwtToken = result.data.payload;
+      let decodedToken = jwtDecode(jwtToken);
+
       setAxiosAuthToken(jwtToken);
 
-      let decodedToken = jwtDecode(jwtToken);
       dispatch({
         type: "LOGIN",
         user: {
           email: decodedToken.email,
           userImage: decodedToken.userImage,
-
+          userName: decodedToken.userName,
+          postArray: decodedToken.postArray
         },
       });
 
       window.localStorage.setItem("jwtToken", jwtToken);
-      //  props.history.push("/");
+      props.history.push("/");
     }
-
     // toast.success("Login success!");
-
-
     catch (e) {
       // if (e.response.status === 429) {
       console.log(e)
@@ -101,7 +97,7 @@ function Login(props) {
 
 
   return (
-    <div>
+    <div id="backgroundDiv">
 
       <div className="icherishDiv">
         <img id="icherishIcon" src={"/images/love-letter.png"} alt={"icherish"} />
@@ -133,7 +129,7 @@ function Login(props) {
               <div className="block-container">
                 <label htmlFor="password">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   placeholder="Password"
                   name="password"

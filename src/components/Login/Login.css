@@ -1,6 +1,10 @@
 body {
-    background-color:skyblue;
+    background-color:white;
     color:black;
+  }
+
+ #backgroundDiv {
+    background-color:#c5e1a5
   }
 
 .icherishDiv{

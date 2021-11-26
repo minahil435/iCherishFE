@@ -1,0 +1,9 @@
+#userImage{
+    border:white 1px solid;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit:cover;
+    vertical-align: middle;
+    margin-right:10px
+}

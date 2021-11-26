@@ -7,13 +7,15 @@ const initialState = {
     user: isUserExits()
 };
 
+
 function isUserExits() {
     if (checkIfUserIsAuth() != null) {
         return {
             email: checkIfUserIsAuth().email,
             userImage: checkIfUserIsAuth().userImage,
-            userName: checkIfUserIsAuth().userName
-        }
+            userName: checkIfUserIsAuth().userName,
+            postArray: checkIfUserIsAuth().postArray
+         }
     }
     return null
 }
@@ -25,7 +27,8 @@ function reducer(state, action) {
                 user: {
                     email: action.user.email,
                     userImage: action.user.userImage,
-                    userName: action.user.userName
+                    userName: action.user.userName,
+                    postArray: action.user.postArray
                 },
             };
         case "LOG_OUT":
@@ -34,11 +37,22 @@ function reducer(state, action) {
             return {
                 user: null,
             };
+            
+        case "Update":
+            return {
+                user: {
+                    email: initialState.user.email,
+                    userImage: initialState.user.userImage,
+                    userName: initialState.user.userName,
+                    postArray: action.user.postArray
+                },
+            };
         default:
             return state;
     }
 }
 
+console.log(initialState.user)
 function AuthContextWrapper({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (

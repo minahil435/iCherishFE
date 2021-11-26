@@ -1,20 +1,20 @@
 import './App.css';
-import Header from "./components/header/header";
-import Login from "./components/Login/Login"
-import Home from "./components/Home/home"
-import Form from "./components/form/form"
-import AuthContextWrapper from "./context/AuthContext"
+import * as React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+import AuthContextWrapper from "../src/context/AuthContext"
+import MainRouter from "./MainRouter"
+require("dotenv").config()
+
 
 function App() {
   return (
-    <AuthContextWrapper>
-     
-        <Header />
-      {/* <Login /> */}
-      {/* <Home /> */}
-      <Form/>        
-      </AuthContextWrapper>
-
+    <React.Suspense fallback={<div>Loading... </div>}>
+    <Router>
+        <AuthContextWrapper>
+          <MainRouter />
+        </AuthContextWrapper>
+      </Router>
+    </React.Suspense>
   );
 }
 
