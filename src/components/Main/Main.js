@@ -5,6 +5,8 @@ import "./Main.css";
 import Post from "./Post"
 import PostForm from "../form/PostForm"
 import { AuthContext } from "../../context/AuthContext";
+import { TransitionGroup } from 'react-transition-group';
+
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -88,15 +90,16 @@ function Main(props) {
             <div id="mainPageDiv">
                 
                 {PostArray.length !== 0 ?  (<div id="mainPageLeftDiv">
-                    {PostArray.map((item, index) => {
-                        return <Post
+            
+                     {PostArray.map((item, index) => {
+                         return <Post
                             key={item.id}
                             item={item}
                             index={index}
                             DeletePostButtonPressed={DeletePostButtonPressed}
-                        />
-                    })}
-                </div>) : (<div>No Posts</div>)}
+                        /> 
+                        })}
+                    </div>) : (<div>No Posts</div>)}
 
                 <div id="mainPageRightDiv">
                     <PostForm

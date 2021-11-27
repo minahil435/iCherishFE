@@ -173,8 +173,9 @@ const PostForm = (props) => {
                     <input type="file"
                         required
                         ref={ref}
-                        onChange={(e) => setPostData({ ...postData, memoryImage: e.target.files[0] })} /> {errorSelectedFile}
+                        onChange={(e) => setPostData({ ...postData, memoryImage: e.target.files[0] })} /> 
                 </div>
+                    {/* {errorSelectedFile} */}
                 <Button
                     className={classes.buttonSubmit}
                     variant="contained" color="primary"
