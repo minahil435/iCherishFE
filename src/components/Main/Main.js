@@ -24,6 +24,7 @@ function Main(props) {
 
     useEffect(() => {
         GetPostList();
+        // window.location.reload()
     }, [categorySelected, value])
 
     const handleChange = (event, newValue) => {
@@ -34,6 +35,7 @@ function Main(props) {
         try {
             if (value === 0){
             let Data = await Axios.get(`api/memories/get-all-Posts?category=${categorySelected}`);
+             
             setPostArray(Data.data)
             }
             if (value === 1) {

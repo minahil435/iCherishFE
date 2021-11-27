@@ -1,4 +1,4 @@
-import React,{ useContext} from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import { TextField } from '@material-ui/core';
@@ -33,10 +33,13 @@ const ExpandMore = styled((props) => {
 
 export default function Post(props) {
 
-    const { state: {user}, dispatch} = useContext(AuthContext);
+    const { state: { user }, dispatch } = useContext(AuthContext);
     const [alreadyFavourite, setAlreadyFavorite] = React.useState(isPostAlreadyFav());
     const [count, setCount] = React.useState(props.item.LikeCount);
     const [expanded, setExpanded] = React.useState(false);
+    const [comment, setComment] = React.useState("");
+    const [commentArray, setCommentArray] = useState(props.item.comments);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -44,81 +47,80 @@ export default function Post(props) {
     function isPostAlreadyFav() {
         return user.postArray.includes(props.item._id)
     }
-    
+
     async function loveItemClicked() {
-        console.log(isPostAlreadyFav())
-        if (isPostAlreadyFav()) {return}
-        else{
-           await Axios.post(`/api/memories/liked-post`, 
-                { _id: props.item._id,
-                 email: user.email});
-            
+        if (isPostAlreadyFav()) { return }
+        else {
+            await Axios.post(`/api/memories/liked-post`,
+                {
+                    _id: props.item._id,
+                    email: user.email
+                });
+
             setAlreadyFavorite(true)
             setCount(count + 1)
-              
-            
+
             let updatedArray = [...user.postArray]
             updatedArray.push(props.item._id)
             console.log(updatedArray)
-          
+
             dispatch({
                 type: "Update",
                 user: {
                     postArray: updatedArray
                 },
             });
-            
         }
     }
- 
+
+    async function sendComment() {
+        if (comment === "") { return }
+        else {
+            let postComment = await Axios.post("/api/comment/save-comment",
+                {
+                    postId: props.item._id,
+                    comment: comment,
+                    creatorName: user.userName,
+                    creatorImage: user.userImage
+                });
+            setCommentArray([postComment.data, ...commentArray])
+            setComment("")
+           
+        }
+    }
 
     return (
- 
-            <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#33691e', bgcolor: '#f1f8e9', height: expanded ? 600 : 350, }}>
+        <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#33691e', bgcolor: '#f1f8e9', height: expanded ? 600 : 375}}>
             <CardHeader
                 avatar={
-                    <Avatar  aria-label="recipe">
-                        <img //user image
-                            className="wallpaper"
-                            src={process.env.REACT_APP_PICTURES + user.userImage}
-                            alt="user profile picture"
-                            objectFit="cover"
-                        />
-                    </Avatar>
+                    <Avatar src={process.env.REACT_APP_PICTURES + user.userImage} alt="user profile picture"/>
                 }
-                action={//delete button
+                action={
                     (props.item.creatorEmail == user.email) ?
                         <IconButton aria-label="settings" onClick={() => props.DeletePostButtonPressed(props.item._id)} >
-                        <HighlightOffIcon /> 
-                    </IconButton> : ""
+                            <HighlightOffIcon />
+                        </IconButton> : ""
                 }
                 title={props.item.title}
                 subheader={`${user.userName}`}
             />
-            {/* postimage */}
             <CardMedia
-                component= "img"
-                height="194"
+                component="img"
+                height="250"
                 image={process.env.REACT_APP_PICTURES + props.item.memoryImage}
                 alt={props.item.memoryImage}
             />
-          
             <CardActions disableSpacing>
-
-                <IconButton aria-label="add to favorites" onClick = {loveItemClicked}>
-                    <FavoriteIcon sx={{ color: alreadyFavourite ?  "red" : "grey" }} />
+                <IconButton aria-label="add to favorites" onClick={loveItemClicked}>
+                    <FavoriteIcon sx={{ color: alreadyFavourite ? "red" : "grey" }} />
                 </IconButton>
-                <Typography variant="body2" color="text.secondary"> 
+                <Typography variant="caption" color="text.secondary">
                     {count}
                 </Typography>
-
-              
                 <LocationOnIcon />
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                     {props.item.location}
                 </Typography>
-
-
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
@@ -129,88 +131,51 @@ export default function Post(props) {
                 </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
+
                 <CardContent>
-                    <h1>Experience:</h1>
-                    <h3>
+                    <h1 class= "bold">Experience:</h1>
+                    <p class="paragraph">
                         {props.item.message}
-                    </h3>
-                    <br />
-                    
-                   
-                   <div class = "comment"><div><img id="userImage" src={process.env.REACT_APP_PICTURES + user.userImage} alt={"userPicture"} /></div>
-                   
-                   <div> <TextField
-                            
-                        
-                        name="message"
-                        variant="outlined"
-                        label="Comment"
-                        fullWidth
-                        rows={1}
-                       
-                            inputProps={{ maxLength: 12}}
-                        // value={postData.message}
-                        // onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-                         /></div>
-                        <div>  <IconButton aria-label="add to favorites" onClick={loveItemClicked}>
-                            <SendIcon sx={{ color: alreadyFavourite ? "red" : "grey" }} />
+                    </p>
+                    <hr />
+
+                    <div class="comment">
+                        <div><img id="userImage" src={process.env.REACT_APP_PICTURES + user.userImage} alt={"userPicture"} /></div>
+                        <div><TextField
+                            name="comment"
+                            variant="outlined"
+                            label="Comment"
+                            fullWidth
+                            rows={1}
+                            inputProps={{ maxLength: 25 }}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)} /></div>
+                        <div><IconButton aria-label="add to favorites" onClick={sendComment}>
+                            <SendIcon  />
                         </IconButton></div>
-                         </div>
+                    </div>
 
-                  
-                        <div id="div2">
-
-                        <TextField
-                            id="outlined-read-only-input"
-                            // error={errorMessage}
-                            name="message"
-                            variant="outlined"
-                            fullWidth
-                            rows={1}
-                            inputProps={{ readOnly: true}}
-                            value={"reaalu goof"}
-                        // helperText={errorMessage}
-                        // id={errorMessage ? "outlined-error" : ""}
-                        // onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-                        />
-                       
-                        <TextField
-                            m={5}
-                            id="outlined-read-only-input"
-                            // error={errorMessage}
-                            name="message"
-                            variant="outlined"
-                            fullWidth
-                            rows={1}
-                            inputProps={{ readOnly: true }}
-                            value={"reaalu goof"}
-                        // value={postData.message}
-                        // helperText={errorMessage}
-                        // id={errorMessage ? "outlined-error" : ""}
-                        // onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-                        />
-                        <TextField
-                            id="outlined-read-only-input"
-                            // error={errorMessage}
-                            name="message"
-                            variant="outlined"
-                            fullWidth
-                            rows={1}
-                            inputProps={{ readOnly: true }}
-                            value={"reaalu goof"}
-                        // value={postData.message}
-                        // helperText={errorMessage}
-                        // id={errorMessage ? "outlined-error" : ""}
-                        // onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-                        />
-                       
-                          
-                        </div>
-                   
+                     <div id="div2" >
+                        {commentArray.map((item) => {
+                            return (
+                                <div class="comment">
+                                    <div><img id="userImage" src={process.env.REACT_APP_PICTURES + item.creatorImage} alt={"userPicture"} /></div>
+                           <div> <TextField
+                                id="outlined-read-only-input"
+                                name="message"
+                                variant="outlined"
+                                fullWidth
+                                label={item.creatorName}
+                                rows={1}
+                                inputProps={{ readOnly: true }}
+                                value={item.comment}
+                                        color="warning"
+                                        focused
+                            /></div>
+                        </div>)})}
+                    </div>
                 </CardContent>
             </Collapse>
         </Card>
-    
-        
     );
 }

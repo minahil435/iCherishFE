@@ -12,6 +12,7 @@
 .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
 }
+
 #userImage{
     border:white 1px solid;
     border-radius: 50%;
@@ -19,15 +20,22 @@
     width: 40px;
     object-fit:cover;
     vertical-align: middle;
-    /* margin-right:4px */
 }
 .comment{
   margin-bottom: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap:4px
+  gap:4px;
+  margin-top: 8px;
+}
+.bold{
+  font-weight: bold;
+  font-size: large;
+}
+.paragraph{
+  font-weight:lighter;
 }
 
 
-#div2 { overflow-y: scroll; margin-bottom: 12px; height : 100px}
+#div2 { overflow-y: scroll;  height : 100px; padding-bottom: 20px;}

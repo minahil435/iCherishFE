@@ -21,12 +21,6 @@ export default function ButtonAppBar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const setCategory = (item) => {
-        if (item === "travel"){
-
-        }
-        else{}
-    };
     const {
         state: { user }, dispatch
     } = useContext(AuthContext);
@@ -63,10 +57,14 @@ export default function ButtonAppBar() {
                         }}
                     >
                         <MenuItem>
-                            <NavLink to="/main/travel">Travel</NavLink>
+                            {/* <NavLink to="/main/travel">Travel</NavLink> */}
+                            <a onClick={() => { window.location.href = "/main/travel" }}>Travel</a>
+
                         </MenuItem>
                         <MenuItem> 
-                            <NavLink to="/main/food">Food</NavLink>
+                            <a onClick={() => { window.location.href = "/main/food" }}>Food</a>
+{/* 
+                            <NavLink to="/main/food" >Food</NavLink> */}
                          </MenuItem>
                     </Menu>
        
