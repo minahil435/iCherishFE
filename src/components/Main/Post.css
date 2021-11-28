@@ -36,6 +36,9 @@
 .paragraph{
   font-weight:lighter;
 }
+#Experience{
+  margin-bottom: 4px;
+}
 
 
 #div2 { overflow-y: scroll;  height : 100px; padding-bottom: 20px;}

@@ -18,6 +18,7 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 function Main(props) {
 
     const [PostArray, setPostArray] = useState([]);
+    const [LikedPostArray, setLikedPostArray] = useState([]);
     const [value, setValue] = React.useState(0);
     const { state: { user } } = useContext(AuthContext);
     var categorySelected = props.match.params.category
@@ -33,9 +34,10 @@ function Main(props) {
 
     async function GetPostList() {
         try {
+            let DataA = await Axios.get(`api/user/getLikePostID?email=${user.email}`)
+            setLikedPostArray(DataA.data)
             if (value === 0){
-            let Data = await Axios.get(`api/memories/get-all-Posts?category=${categorySelected}`);
-             
+            let Data = await Axios.get(`api/memories/get-all-Posts?category=${categorySelected}`);     
             setPostArray(Data.data)
             }
             if (value === 1) {
@@ -99,6 +101,7 @@ function Main(props) {
                             item={item}
                             index={index}
                             DeletePostButtonPressed={DeletePostButtonPressed}
+                            LikedPostArray = {LikedPostArray}
                         /> 
                         })}
                     </div>) : (<div>No Posts</div>)}

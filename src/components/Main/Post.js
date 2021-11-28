@@ -45,7 +45,7 @@ export default function Post(props) {
     };
 
     function isPostAlreadyFav() {
-        return user.postArray.includes(props.item._id)
+        return props.LikedPostArray.includes(props.item._id)
     }
 
     async function loveItemClicked() {
@@ -90,7 +90,7 @@ export default function Post(props) {
     }
 
     return (
-        <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#33691e', bgcolor: '#f1f8e9', height: expanded ? 600 : 375}}>
+        <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#33691e', bgcolor: '#f1f8e9', height: expanded ? 600 : 390}}>
             <CardHeader
                 avatar={
                     <Avatar src={process.env.REACT_APP_PICTURES + user.userImage} alt="user profile picture"/>
@@ -118,7 +118,8 @@ export default function Post(props) {
                     {count}
                 </Typography>
                 <LocationOnIcon />
-                <Typography variant="caption" color="text.secondary">
+                <Typography variant="caption" color="text.secondary"
+                    style={{ wordWrap: "break-word" }}>
                     {props.item.location}
                 </Typography>
                 <ExpandMore
@@ -133,7 +134,7 @@ export default function Post(props) {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
 
                 <CardContent>
-                    <h1 class= "bold">Experience:</h1>
+                    <h1 id= "Experience"class= "bold">Experience:</h1>
                     <p class="paragraph">
                         {props.item.message}
                     </p>

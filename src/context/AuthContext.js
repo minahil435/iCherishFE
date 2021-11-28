@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import setAxiosAuthToken from "../utils/checkAuth"
 import checkIfUserIsAuth from "../utils/checkAuth"
+
 export const AuthContext = createContext({});
 
 const initialState = {
@@ -8,7 +9,8 @@ const initialState = {
 };
 
 
-function isUserExits() {
+  function isUserExits() {
+
     if (checkIfUserIsAuth() != null) {
         return {
             email: checkIfUserIsAuth().email,
@@ -52,7 +54,6 @@ function reducer(state, action) {
     }
 }
 
-console.log(initialState.user)
 function AuthContextWrapper({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
