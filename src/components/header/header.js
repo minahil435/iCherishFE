@@ -3,12 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./header.css";
 
@@ -46,7 +45,8 @@ export default function ButtonAppBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Menu
+                  
+                        <Menu
                         id="basic-menu"
                         keepMounted
                         anchorEl={anchorEl}
@@ -57,17 +57,13 @@ export default function ButtonAppBar() {
                         }}
                     >
                         <MenuItem>
-                            {/* <NavLink to="/main/travel">Travel</NavLink> */}
                             <a onClick={() => { window.location.href = "/main/travel" }}>Travel</a>
-
                         </MenuItem>
                         <MenuItem> 
                             <a onClick={() => { window.location.href = "/main/food" }}>Food</a>
-{/* 
-                            <NavLink to="/main/food" >Food</NavLink> */}
                          </MenuItem>
-                    </Menu>
-       
+                      </Menu>
+                    
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         iCherish

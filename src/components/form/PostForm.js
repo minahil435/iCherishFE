@@ -10,7 +10,6 @@ import Axios from "../../utils/Axios"
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box';
 
-
 const PostForm = (props) => {
     const {
         state: { user }
@@ -175,24 +174,17 @@ const PostForm = (props) => {
                         ref={ref}
                         onChange={(e) => setPostData({ ...postData, memoryImage: e.target.files[0] })} /> 
                 </div>
-                    {/* {errorSelectedFile} */}
-                <Button
-                    className={classes.buttonSubmit}
-                    variant="contained" color="primary"
-                    size="large"
-                    type="submit" o
-                    nClick={handleSubmit}
-                    fullWidth>
+                    
+                <button 
+                    style={{ marginRight: 4, backgroundColor: "#8BC34A", width: "30%"}}
+                    onClick={handleSubmit}>
                     Submit
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    onClick={clear}
-                    fullWidth>
+                </button>
+                <button
+                    style={{ backgroundColor: "#2196F3", width: "30%",height: "30px" }}
+                    onClick={clear}>
                     Clear
-                </Button>
+                </button>
             </form>
          </Paper>
         </Box>
