@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthContext } from "./context/AuthContext";
 import Header from "./components/header/header";
+import LoginHeader from "./components/header/LoginHeader"
 
 const Login = React.lazy(() => import("./components/Login/Login"));
 const SigIn = React.lazy(() => import("./components/Signup/Signup"));
@@ -16,7 +17,7 @@ function MainRouter() {
   } = useContext(AuthContext);
   return (
     <>
-      {user !== null ? <Header /> : ""}
+      {user !== null ? <Header /> : <LoginHeader />}
       <Switch>
         <Route
           exact

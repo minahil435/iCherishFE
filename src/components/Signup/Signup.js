@@ -131,23 +131,15 @@ function Signup(props) {
     <div className="MainSiginGrid">
 
       <div className="welcomeDiv">
-        <div className="icherishDiv">
-          <img id="icherishIcon" src={"/images/love-letter.png"} alt={"icherish"} />
-          <div id="icherishName">iCherish</div>
-        </div>
-
         <div id="welcomeiCherish">
-          {"Welcome to iCherish"}
+          Welcome to iCherish
           <div id="slogon">
-            {"If you love something, love it completely, share it, CHERISH IT!"}</div>
+            <br />{"If you love something, love it completely, share it, CHERISH IT!"}</div>
         </div>
       </div>
 
       <div className="Rightcontainer">
-        <div id="haveAccount">
-          <div>Already have a account?</div>
-          <div><Link id="haveAccountButton" to="/login">LogIn!</Link></div>
-        </div>
+        
 
         <div className="containerFlex">
           <div className="container">

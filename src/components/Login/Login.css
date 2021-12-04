@@ -1,40 +1,20 @@
+
 body {
-    background-color:white;
-    color:black;
+  color:#5E3707;
   }
 
  #backgroundDiv {
-    background-color:#c5e1a5
-  }
+  background-image: url('https://blog.hootsuite.com/wp-content/uploads/2017/12/social-media-image-tools.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-.icherishDiv{
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  margin-left: 24px;
-  }
-
-
-  #icherishIcon{
-    margin-top: 24px;
-    width: 60px;
-    height:60px;
-    border-radius: 50%;
-    border:2px double white; 
-    background-color: black;
-    object-fit:fill;
-  }
-  #icherishName{
-    align-self: center;
-    font-family: 'Brush Script MT', cursive;
-    font-size: xx-large;
-    font-weight: bold;
-  }
-  
   .container2{
     width: 50%;
     height: 400px;
-    background-color:white;
+    background-color:#FFEEDC;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 0;
@@ -42,6 +22,7 @@ body {
     left: 0;
     right: 0;
     margin: auto;
+    border: black 1px solid;
   }
    
   .form-text {
@@ -117,4 +98,30 @@ body {
     font-size: 16px;
     color:red;
   }
+
+  @media screen and (max-width :  800px) {
+    .container2{
+    height: 300px;
+  }
+
+  .form-group-block .block-container input {
+    padding: 5px 5px;
+    width: 90%
+  }
   
+  .form-group-block {
+   margin: 8px;
+  }
+    
+  .button-container button {
+    padding: 5px 5px;
+    font-size: 15px;
+  }
+
+  .form-text {
+    text-align: center;
+    margin: 15px 15px;
+    font-size: 25px;
+  }
+}
+   

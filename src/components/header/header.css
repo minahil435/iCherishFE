@@ -7,3 +7,12 @@
     vertical-align: middle;
     margin-right:10px
 }
+  #icherishIcon{
+    width: 25px;
+    height:25px;
+    border-radius: 50%;
+    border:2px double white; 
+    background-color: black;
+    object-fit:fill;
+    margin-right: 4px;
+  }

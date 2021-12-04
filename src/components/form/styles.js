@@ -6,6 +6,12 @@ export default makeStyles((theme) => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
         },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "orange"
+        },
+        "& .MuiInputLabel-outlined.Mui-focused": {
+            color: "#5E3707"
+        }
     },
     paper: {
         padding: theme.spacing(2),
@@ -22,4 +28,5 @@ export default makeStyles((theme) => ({
     buttonSubmit: {
         marginBottom: 10,
     },
+
 }));

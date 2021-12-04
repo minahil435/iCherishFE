@@ -13,8 +13,8 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
 }
 
-#userImage{
-    border:white 1px solid;
+.userImage{
+    border:white 2px solid;
     border-radius: 50%;
     height: 40px;
     width: 40px;
@@ -40,5 +40,4 @@
   margin-bottom: 4px;
 }
 
-
-#div2 { overflow-y: scroll;  height : 100px; padding-bottom: 20px;}
+#div2 { overflow-y: scroll;  height : 90px; padding-bottom: 20px;}

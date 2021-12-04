@@ -97,12 +97,9 @@ function Login(props) {
 
 
   return (
-    <div id="backgroundDiv">
-
-      <div className="icherishDiv">
-        <img id="icherishIcon" src={"/images/love-letter.png"} alt={"icherish"} />
-        <div id="icherishName">iCherish</div>
-      </div>
+    
+    <div>
+      <div id="backgroundDiv"></div>
       <div className="container2">
         <div className="form-text">Log In</div>
 

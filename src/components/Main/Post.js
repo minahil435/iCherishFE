@@ -17,9 +17,39 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { AuthContext } from "../../context/AuthContext";
 import SendIcon from '@mui/icons-material/Send';
 import Axios from "../../utils/Axios"
+import { makeStyles } from "@material-ui/core/styles";
 
 import "./Post.css";
 
+const useStyles = makeStyles({
+    root: {
+        // "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        //     borderColor: "orange"
+        // },
+        // "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        //     borderColor: "orange"
+        // },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#5E3707"
+        },
+        // "& .MuiOutlinedInput-input": {
+        //     color: "orange"
+        // },
+        // "&:hover .MuiOutlinedInput-input": {
+        //     color: "orange"
+        // },
+        // "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+        //     color: "orange"
+        // },
+        // "& .MuiInputLabel-outlined": {
+        //     color: "orange"
+        // },
+       
+        "& .MuiInputLabel-outlined.Mui-focused": {
+            color: "#5E3707"
+        }
+    }
+});
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -32,7 +62,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function Post(props) {
-
+    const classes = useStyles();
     const { state: { user }, dispatch } = useContext(AuthContext);
     const [alreadyFavourite, setAlreadyFavorite] = React.useState(isPostAlreadyFav());
     const [count, setCount] = React.useState(props.item.LikeCount);
@@ -88,20 +118,22 @@ export default function Post(props) {
            
         }
     }
+   
 
     return (
-        <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#33691e', bgcolor: '#f1f8e9', height: expanded ? 600 : 390}}>
+        <Card className="hvr-glow" sx={{ width: 320, border: 2, borderColor: '#5E3707', bgcolor: '#FFEEDC', height: expanded ? 630 : 400, }} style={{ }}>
             <CardHeader
                 avatar={
-                    <Avatar src={process.env.REACT_APP_PICTURES + user.userImage} alt="user profile picture"/>
+                    <Avatar style={{
+                        border: '2px solid white'}} src={process.env.REACT_APP_PICTURES + user.userImage} alt="user profile picture"/>
                 }
                 action={
                     (props.item.creatorEmail == user.email) ?
-                        <IconButton aria-label="settings" onClick={() => props.DeletePostButtonPressed(props.item._id)} >
-                            <HighlightOffIcon />
+                        <IconButton  aria-label="settings" onClick={() => props.DeletePostButtonPressed(props.item._id)} >
+                            <HighlightOffIcon sx={{ color: 'black' }} />
                         </IconButton> : ""
                 }
-                title={props.item.title}
+                title={<div style={{ fontWeight: "bold"}}>{props.item.title}</div>}
                 subheader={`${user.userName}`}
             />
             <CardMedia
@@ -111,13 +143,13 @@ export default function Post(props) {
                 alt={props.item.memoryImage}
             />
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={loveItemClicked}>
-                    <FavoriteIcon sx={{ color: alreadyFavourite ? "red" : "grey" }} />
+                <IconButton aria-label="add to favorites" onClick={loveItemClicked}  >
+                    <FavoriteIcon sx={{ color: alreadyFavourite ? "#970003" : "white" }}/>
                 </IconButton>
                 <Typography variant="caption" color="text.secondary">
                     {count}
                 </Typography>
-                <LocationOnIcon />
+                <LocationOnIcon sx={{ color: 'black' }} />
                 <Typography variant="caption" color="text.secondary"
                     style={{ wordWrap: "break-word" }}>
                     {props.item.location}
@@ -128,7 +160,7 @@ export default function Post(props) {
                     aria-expanded={expanded}
                     aria-label="show more"
                 >
-                    <ExpandMoreIcon />
+                    <ExpandMoreIcon sx={{ color: 'black' }}  />
                 </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -138,10 +170,11 @@ export default function Post(props) {
                     <p class="paragraph">
                         {props.item.message}
                     </p>
-                    <hr />
+                    <br />
+                    <h1 class="bold">Reviews:</h1>
 
                     <div class="comment">
-                        <div><img id="userImage" src={process.env.REACT_APP_PICTURES + user.userImage} alt={"userPicture"} /></div>
+                        <div><img class="userImage" src={process.env.REACT_APP_PICTURES + user.userImage} alt={"userPicture"} /></div>
                         <div><TextField
                             name="comment"
                             variant="outlined"
@@ -150,9 +183,11 @@ export default function Post(props) {
                             rows={1}
                             inputProps={{ maxLength: 25 }}
                             value={comment}
-                            onChange={(e) => setComment(e.target.value)} /></div>
+                            onChange={(e) => setComment(e.target.value)} 
+                            className={classes.root}/></div>
+                           
                         <div><IconButton aria-label="add to favorites" onClick={sendComment}>
-                            <SendIcon  />
+                            <SendIcon sx={{ color: 'black' }}/>
                         </IconButton></div>
                     </div>
 
@@ -160,7 +195,7 @@ export default function Post(props) {
                         {commentArray.map((item) => {
                             return (
                                 <div class="comment">
-                                    <div><img id="userImage" src={process.env.REACT_APP_PICTURES + item.creatorImage} alt={"userPicture"} /></div>
+                                    <div><img class="userImage" src={process.env.REACT_APP_PICTURES + item.creatorImage} alt={"userPicture"} /></div>
                            <div> <TextField
                                 id="outlined-read-only-input"
                                 name="message"
@@ -172,6 +207,8 @@ export default function Post(props) {
                                 value={item.comment}
                                         color="warning"
                                         focused
+                                        className={classes.root}
+                                        
                             /></div>
                         </div>)})}
                     </div>
