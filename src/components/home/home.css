@@ -49,10 +49,11 @@
 
 .HomeGrid{
     width: 100%;
-    height: 47vh;
+    height: 43vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:flex-start;
+    margin-top: 8px;
 }
 
 .HomeGridInner{

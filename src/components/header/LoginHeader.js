@@ -4,11 +4,17 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    useLocation
+} from "react-router-dom";
 
 
 export default function LoginAppBar() {
-    let IsLogin  = window.location.href.substring(window.location.href.lastIndexOf('/') + 1) === "login"
-  
+    const location = useLocation()
+    var IsLogin = location.pathname === "/login" 
+      
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ bgcolor: '#EC8923' }}>
