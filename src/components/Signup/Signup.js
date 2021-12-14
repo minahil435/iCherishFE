@@ -5,13 +5,14 @@ import jwtDecode from "jwt-decode";
 import setAxiosAuthToken from "../../utils/checkAxioAuth";
 import useChangeInputConfig from "../../hooks/inputFieldHooks";
 import { AuthContext } from "../../context/AuthContext";
-import { Link, NavLink } from "react-router-dom";
+import { useSnackbar } from 'notistack';
 
 function Signup(props) {
 
   const {
     state: { user }, dispatch
   } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [
     email,
@@ -94,7 +95,7 @@ function Signup(props) {
   function handleconfirmPasswordOnFocus() {
     setconfirmPasswordOnFocus(true)
   }
-
+  var variant = 'success'
   async function handleOnSubmit(event) {
     event.preventDefault();
     try {
@@ -118,12 +119,17 @@ function Signup(props) {
           postArray: decodedToken.postArray
         },
       });
-
+      enqueueSnackbar('Successfully Logged In', {variant});
       window.localStorage.setItem("jwtToken", jwtToken);
       props.history.push("/");
 
     } catch (e) {
-      console.log(e.message);
+      if (e.response.status === 400){
+        enqueueSnackbar(e.response.data.message ,'error')
+    }
+    else{
+        enqueueSnackbar("Connection Error", 'error')
+      }
     }
   };
 

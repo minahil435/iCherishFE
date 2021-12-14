@@ -28,21 +28,21 @@ function Main(props) {
 
     async function GetPostList() {
         try {
-            let DataA = await Axios.get(`api/user/getLikePostID?email=${user.email}`)
+            let DataA = await Axios.get(`/api/user/getLikePostID?email=${user.email}`)
             setLikedPostArray(DataA.data)
             if (value === 0) {
-                let Data = await Axios.get(`api/memories/get-all-Posts?category=${categorySelected}`);
+                let Data = await Axios.get(`/api/memories/get-all-Posts?category=${categorySelected}`);
                 setPostArray(Data.data)
             }
             if (value === 1) {
-                let Data = await Axios.get(`api/memories/get-all-favorite-posts?email=${user.email}`);
+                let Data = await Axios.get(`/api/memories/get-all-favorite-posts?email=${user.email}`);
                 let filteredPostArray = Data.data.filter((item) => {
                     return item.category === categorySelected
                 });
                 setPostArray(filteredPostArray)
             }
             if (value === 2) {
-                let Data = await Axios.get(`api/memories/get-all-user-posts?email=${user.email}&category=${categorySelected}`);
+                let Data = await Axios.get(`/api/memories/get-all-user-posts?email=${user.email}&category=${categorySelected}`);
                 setPostArray(Data.data)
             }
         }

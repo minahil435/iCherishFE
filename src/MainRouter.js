@@ -8,7 +8,7 @@ import LoginHeader from "./components/header/LoginHeader"
 
 const Login = React.lazy(() => import("./components/Login/Login"));
 const SigIn = React.lazy(() => import("./components/Signup/Signup"));
-const Home = React.lazy(() => import("./components/Home/home"));
+const Home = React.lazy(() => import("./components/home/home"));
 const Main = React.lazy(() => import("./components/Main/Main"));
 
 function MainRouter() {

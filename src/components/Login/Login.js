@@ -4,6 +4,7 @@ import Axios from "../../utils/Axios"
 import setAxiosAuthToken from "../../utils/checkAxioAuth";
 import useChangeInputConfig from "../../hooks/inputFieldHooks";
 import { AuthContext } from "../../context/AuthContext";
+import {  useSnackbar } from 'notistack';
 import "./Login.css";
 
 function Login(props) {
@@ -11,6 +12,7 @@ function Login(props) {
     state: { user }, dispatch
   } = useContext(AuthContext);
 
+  const { enqueueSnackbar } = useSnackbar();
   const [
     email,
     handleEmailChange,
@@ -32,6 +34,7 @@ function Login(props) {
   ] = useChangeInputConfig("password");
 
   const [canSubmit, setCanSubmit] = useState(true);
+
 
   useEffect(() => {
     if (user !== null) {
@@ -55,7 +58,7 @@ function Login(props) {
     }
   }, [emailcanSubmit, passwordcanSubmit]);
 
-
+  var variant = 'success'
   async function handleOnSubmit(event) {
     event.preventDefault();
 
@@ -79,25 +82,19 @@ function Login(props) {
           postArray: decodedToken.postArray
         },
       });
-
+      
+      enqueueSnackbar('Successfully Logged In', { variant });
       window.localStorage.setItem("jwtToken", jwtToken);
       props.history.push("/");
     }
-    // toast.success("Login success!");
+ 
     catch (e) {
-      // if (e.response.status === 429) {
-      console.log(e)
-      // } else {
-      // toast.error(e.response.data.payload);
-      // }
-      //   console.log(e)
-      // }
+      enqueueSnackbar(e.response.data.payload, 'error')
     }
   }
 
 
   return (
-    
     <div>
       <div id="backgroundDiv"></div>
       <div className="container2">
